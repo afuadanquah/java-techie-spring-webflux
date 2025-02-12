@@ -2,6 +2,7 @@ package org.example.javatechiespringwebflux.dao;
 
 import org.example.javatechiespringwebflux.dto.Customer;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +31,13 @@ public class CustomerDao implements Dao<Customer> {
                 .collect(Collectors.toList());
     }
 
+    public Flux<Customer> getAllFlux() {
+
+        return Flux.range(1, 10)
+                .doOnNext(i -> sleepExecution())
+                .doOnNext(i -> System.out.println("process count: " + i))
+                .map(i -> new Customer(i, "customer" + i));
+    }
 
 
 }

@@ -3,6 +3,7 @@ package org.example.javatechiespringwebflux.service;
 import org.example.javatechiespringwebflux.dao.CustomerDao;
 import org.example.javatechiespringwebflux.dto.Customer;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -19,6 +20,15 @@ public class CustomerService {
 
         Long startTime = System.currentTimeMillis();
         List<Customer> customers = customerDao.getAll();
+        Long endTime = System.currentTimeMillis();
+        System.out.println("Total time taken: " + (endTime - startTime) + "ms");
+        return customers;
+    }
+
+    public Flux<Customer> getAllCustomersFlux(){
+
+        Long startTime = System.currentTimeMillis();
+        Flux<Customer> customers = customerDao.getAllFlux();
         Long endTime = System.currentTimeMillis();
         System.out.println("Total time taken: " + (endTime - startTime) + "ms");
         return customers;
