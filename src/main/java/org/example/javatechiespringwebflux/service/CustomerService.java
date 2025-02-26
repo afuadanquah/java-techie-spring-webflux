@@ -30,7 +30,7 @@ public class CustomerService {
         Long startTime = System.currentTimeMillis();
         Flux<Customer> customers = customerDao.getAllFlux();
         Long endTime = System.currentTimeMillis();
-        System.out.println("Total time taken: " + (endTime - startTime) + "ms");
+        System.out.println("Total time taken flux: " + (endTime - startTime) + "ms");
         return customers;
     }
 }

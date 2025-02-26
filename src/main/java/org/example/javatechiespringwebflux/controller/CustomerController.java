@@ -21,12 +21,12 @@ public class CustomerController {
     }
 
     @GetMapping()
-    private List<Customer> getAllCustomers(){
+    public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
 
     @GetMapping(value = "/flux", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    private Flux<Customer> getAllCustomersStream(){
+    public Flux<Customer> getAllCustomersStream(){
         return customerService.getAllCustomersFlux();
     }
 }
