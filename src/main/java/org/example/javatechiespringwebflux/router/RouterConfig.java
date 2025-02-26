@@ -24,6 +24,7 @@ public class RouterConfig {
         return RouterFunctions.route()
                 .GET("/router/customers", customerHandler::loadCustomers)
                 .GET("/router/customers/stream", customerStreamHandler::getCustmersStream)
+                .GET("/router/customers/{id}", customerHandler::findCustomer)
                 .build();
     }
 }

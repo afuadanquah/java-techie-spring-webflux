@@ -22,4 +22,12 @@ public class CustomerHandler {
         return ServerResponse.ok().body(allFluxCustmerList, Customer.class);
     }
 
+    public Mono<ServerResponse> findCustomer(ServerRequest serverRequest) {
+        int customerId = Integer.valueOf(serverRequest.pathVariable("id"));
+        Mono<Customer> customer = customerDao.getAllFluxCustmerList()
+                .filter(cust -> cust.getId() == customerId)
+                .next();
+        return ServerResponse.ok().body(customer, Customer.class);
+    }
+
 }
