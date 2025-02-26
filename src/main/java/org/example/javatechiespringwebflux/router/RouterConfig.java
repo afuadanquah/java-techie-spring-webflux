@@ -1,6 +1,7 @@
 package org.example.javatechiespringwebflux.router;
 
 import org.example.javatechiespringwebflux.handler.CustomerHandler;
+import org.example.javatechiespringwebflux.handler.CustomerStreamHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -11,15 +12,18 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 public class RouterConfig {
 
     private CustomerHandler customerHandler;
+    private CustomerStreamHandler customerStreamHandler;
 
-    public RouterConfig(CustomerHandler customerHandler) {
+    public RouterConfig(CustomerHandler customerHandler, CustomerStreamHandler customerStreamHandler) {
         this.customerHandler = customerHandler;
+        this.customerStreamHandler = customerStreamHandler;
     }
 
     @Bean
     public RouterFunction<ServerResponse> routerFunction() {
         return RouterFunctions.route()
                 .GET("/router/customers", customerHandler::loadCustomers)
+                .GET("/router/customers/stream", customerStreamHandler::getCustmersStream)
                 .build();
     }
 }
