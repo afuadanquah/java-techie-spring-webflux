@@ -30,4 +30,10 @@ public class CustomerHandler {
         return ServerResponse.ok().body(customer, Customer.class);
     }
 
+    //Handler to save a single customer using POST method
+    public Mono<ServerResponse> saveCustomer(ServerRequest serverRequest) {
+    Mono<Customer> customerMono = serverRequest.bodyToMono(Customer.class);
+    Mono<String> saveResponse = customerMono.map(resp -> "Customer Name: " + resp.getId() + ", Customer Name: " + resp.getName());
+        return ServerResponse.ok().body(saveResponse, String.class);
+    }
 }
