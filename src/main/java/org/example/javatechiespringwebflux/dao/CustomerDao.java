@@ -41,5 +41,12 @@ public class CustomerDao implements Dao<Customer> {
                 .map(i -> new Customer(i, "customer" + i));
     }
 
+    public Flux<Customer> getAllFluxCustmerList() {
+
+        return Flux.range(1, 10)
+                .doOnNext(i -> System.out.println("process count: " + i))
+                .map(i -> new Customer(i, "customer" + i));
+    }
+
 
 }
